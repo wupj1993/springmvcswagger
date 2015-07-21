@@ -24,12 +24,11 @@ import javax.annotation.Resource;
  * ****** Created by 吴培基 on 2015/7/20.19:47
  * ****************************************************
  */
-@Api(basePath = "/",value = "Student",description ="学生信息")
-
+@Api(basePath = "",value = "Student",description ="学生信息")
 @RestController
 @RequestMapping("/")
 public class StudentController extends BaseController {
-    private static final Log LOGGER = LogFactory.getLog(StudentController.class);
+//    private static final Log LOGGER = LogFactory.getLog(StudentController.class);
     @Resource
     private StudentServiceImpl studentService;
 
@@ -40,11 +39,12 @@ public class StudentController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "addStudent",method = RequestMethod.POST,produces = "application/json; charset=utf-8")
-     @ApiOperation(value = "新增学生",notes = "增加学生信息",httpMethod = "POST",response = BaseResult.class)
-    public String addStudent(@ApiParam(required = true, name = "studentInfo", value = "学生实体类")
-                             @RequestParam(value = "studentInfo")Student studentInfo
+    @ApiOperation(value = "新增学生",notes = "增加学生信息",httpMethod = "POST",response = BaseResult.class)
+    public BaseResult addStudent(@ApiParam(required = true, name = "studentInfo", value = "学生实体类")
+                                     @RequestBody Student studentInfo
                              ){
-        LOGGER.debug("穿过来的学生信息:"+studentInfo.toString());
+        LOGGER.debug("过来的学生信息:"+studentInfo.toString());
+        System.out.println("输出过来的学生信息:"+studentInfo.toString());
         if(studentInfo==null){
             return super.buildFailedResultInfo(-1, "post data is empty!");
         }
@@ -54,9 +54,11 @@ public class StudentController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "student/{id}",method = RequestMethod.GET,produces = "application/json; charset=utf-8")
    @ApiOperation(value = "获取学生信息",httpMethod = "GET",notes = "根据学生id获取学生的信息")
-    public String getStudentById(@ApiParam(required = true,name = "id",value = "student id Integer")
+    public BaseResult getStudentById(@ApiParam(required = true,name = "id",value = "student id Integer")
                                   @RequestParam(value = "id")int id){
-       Student student= studentService.getStudentById(id);
+        LOGGER.debug("过来的学生ID:"+id);
+
+        Student student= studentService.getStudentById(id);
         return buildSuccessResultInfo(student);
     }
     

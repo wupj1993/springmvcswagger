@@ -102,5 +102,7 @@
         <url-pattern>*.woff2</url-pattern>
     </servlet-mapping>
     <!-- 字体相关  结束 -->
-
+<listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+</listener>
 </web-app>

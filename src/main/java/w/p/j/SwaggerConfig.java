@@ -14,8 +14,10 @@ import com.mangofactory.swagger.paths.SwaggerPathProvider;
 import com.mangofactory.swagger.plugin.EnableSwagger;
 import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.annotation.Resource;
 
@@ -25,6 +27,8 @@ import javax.annotation.Resource;
  */
 @Configuration
 @EnableSwagger
+@ComponentScan(basePackages = {"w.p.j.controller"})
+@EnableWebMvc
 public class SwaggerConfig {
     @Resource
     private SpringSwaggerConfig springSwaggerConfig;
@@ -40,25 +44,26 @@ public class SwaggerConfig {
      * @return
      */
     private ApiInfo apiInfo() {
+
         ApiInfo apiInfo = new ApiInfo("Rest API.作者吴培基", "使用Swagger产生的API接口文档",
-                "Custom API terms of service", "757671834@qq.com",
+                "<a href='https://github.com/BigDuck'>Github</a>", "757671834@qq.com",
                 "API许可证", "Custom API License URL"
         );
         return apiInfo;
     }
 
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }
-
-    class GtPaths extends SwaggerPathProvider {
-        @Override
-        protected String applicationPath() {
-            return "/restapi";
-        }
-        @Override
-        protected String getDocumentationPath() {
-            return "/restapi";
-        }
-    }
+//    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+//        configurer.enable();
+//    }
+//
+//    class GtPaths extends SwaggerPathProvider {
+//        @Override
+//        protected String applicationPath() {
+//            return "/restapi";
+//        }
+//        @Override
+//        protected String getDocumentationPath() {
+//            return "/restapi";
+//        }
+//    }
 }

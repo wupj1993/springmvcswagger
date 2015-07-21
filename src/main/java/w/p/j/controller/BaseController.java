@@ -19,7 +19,7 @@ import w.p.j.daomain.BaseResult;
  * ****************************************************
  */
 public class BaseController {
-    private static final Log LOGGER = LogFactory.getLog(BaseController.class);
+    public   Log LOGGER = LogFactory.getLog(getClass());
     SerializerFeature[] feature =
             { SerializerFeature.DisableCircularReferenceDetect, SerializerFeature.WriteNullListAsEmpty,
                     SerializerFeature.WriteNullStringAsEmpty, SerializerFeature.WriteNullBooleanAsFalse,
@@ -30,13 +30,14 @@ public class BaseController {
      * @param resultData  : 需要返回的数据，可选
      * @return
      */
-    protected String buildSuccessResultInfo(Object resultData)
+    protected BaseResult buildSuccessResultInfo(Object resultData)
     {
         LOGGER.debug(String.format("enter function, %s", resultData));
         BaseResult resultVo = new BaseResult();
         resultVo.setResultData(resultData);
         resultVo.setResultMessage("success");
-        return JSON.toJSONString(resultVo, feature);
+        return  resultVo;
+      //  return JSON.toJSONString(resultVo, feature);
     }
 
     /**
@@ -47,9 +48,11 @@ public class BaseController {
      *            ：失败信息
      * @return
      */
-    protected String buildFailedResultInfo(int resultCode, String failedMsg)
+
+    protected BaseResult buildFailedResultInfo(int resultCode, String failedMsg)
     {
         BaseResult resultVo = new BaseResult(resultCode, failedMsg);
-        return JSON.toJSONString(resultVo, feature);
+       // return JSON.toJSONString(resultVo, feature);
+        return resultVo;
     }
 }
