@@ -36,4 +36,7 @@ public class Work {
         this.workName = workName;
         this.workId = workId;
     }
+
+    public Work() {
+    }
 }

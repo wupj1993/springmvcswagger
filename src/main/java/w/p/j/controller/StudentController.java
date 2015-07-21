@@ -24,42 +24,70 @@ import javax.annotation.Resource;
  * ****** Created by 吴培基 on 2015/7/20.19:47
  * ****************************************************
  */
-@Api(basePath = "",value = "Student",description ="学生信息")
+@Api(basePath = "/student", value = "Student", description = "学生信息")
 @RestController
-@RequestMapping("/")
+@RequestMapping("/student")
 public class StudentController extends BaseController {
-//    private static final Log LOGGER = LogFactory.getLog(StudentController.class);
+    //    private static final Log LOGGER = LogFactory.getLog(StudentController.class);
     @Resource
     private StudentServiceImpl studentService;
 
     /**
      * 新增加学生信息
+     *
      * @param studentInfo
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "addStudent",method = RequestMethod.POST,produces = "application/json; charset=utf-8")
-    @ApiOperation(value = "新增学生",notes = "增加学生信息",httpMethod = "POST",response = BaseResult.class)
+    @RequestMapping(value = "/addStudent", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @ApiOperation(value = "新增学生信息", notes = "增加学生信息", httpMethod = "POST", response = BaseResult.class)
     public BaseResult addStudent(@ApiParam(required = true, name = "studentInfo", value = "学生实体类")
-                                     @RequestBody Student studentInfo
-                             ){
-        LOGGER.debug("过来的学生信息:"+studentInfo.toString());
-        System.out.println("输出过来的学生信息:"+studentInfo.toString());
-        if(studentInfo==null){
+                                 @RequestBody Student studentInfo
+    ) {
+        LOGGER.debug("过来的学生信息:" + studentInfo.toString());
+        System.out.println("输出过来的学生信息:" + studentInfo.toString());
+        if (studentInfo == null) {
             return super.buildFailedResultInfo(-1, "post data is empty!");
         }
-      boolean isSuccess=  studentService.addStudent(studentInfo);
+        boolean isSuccess = studentService.addStudent(studentInfo);
         return buildSuccessResultInfo(isSuccess);
     }
-    @ResponseBody
-    @RequestMapping(value = "student/{id}",method = RequestMethod.GET,produces = "application/json; charset=utf-8")
-   @ApiOperation(value = "获取学生信息",httpMethod = "GET",notes = "根据学生id获取学生的信息")
-    public BaseResult getStudentById(@ApiParam(required = true,name = "id",value = "student id Integer")
-                                  @RequestParam(value = "id")int id){
-        LOGGER.debug("过来的学生ID:"+id);
 
-        Student student= studentService.getStudentById(id);
+    @ResponseBody
+    @RequestMapping(value = "/student/{id}", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    @ApiOperation(value = "获取学生信息", httpMethod = "GET", notes = "根据学生id获取学生的信息")
+    public BaseResult getStudentById(@ApiParam(required = true, name = "id", value = "student id Integer")
+                                     @PathVariable(value = "id") int id) {
+        LOGGER.debug("过来的学生ID:" + id);
+
+        Student student = studentService.getStudentById(id);
         return buildSuccessResultInfo(student);
     }
-    
+
+    @RequestMapping(value = "/student", method = RequestMethod.PUT)
+    @ApiOperation(value = "更新学生信息", httpMethod = "PUT", notes = "用来更新学生的信息")
+    public
+    @ResponseBody
+    BaseResult updateStudent(
+            @ApiParam(required = true, name = "Student", value = "学生实体类")
+            @RequestBody Student student
+    ) {
+        LOGGER.info("传过来的学生信息" + student);
+        /**
+         * 模拟更新数据
+         */
+        student.setName("老吴");
+        return buildSuccessResultInfo(student);
+    }
+
+    @RequestMapping(value = "/student/{id}", method=RequestMethod.DELETE)
+    @ApiOperation(value = "根据学生id删除学生信息", httpMethod = "DELETE", notes = "根据学生的id进行删除学生信息")
+    public
+    @ResponseBody
+    BaseResult deleteStudent(
+            @ApiParam(required = true, value = "根据学生id删除学生信息", name = "id")
+            @PathVariable("id")int id) {
+        LOGGER.debug("学生的信息" + id);
+        return buildSuccessResultInfo("success");
+    }
 }

@@ -14,7 +14,7 @@ import java.util.List;
  * ****** Created by 吴培基 on 2015/7/21.12:47
  * ****************************************************
  */
-public class Teacher {
+public class Teacher extends BaseDaomain {
     private List<Student> students;
     private Work work;
     private String name;

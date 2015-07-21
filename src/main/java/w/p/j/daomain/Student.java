@@ -8,17 +8,15 @@
 
 package w.p.j.daomain;
 
-import java.io.Serializable;
+import com.wordnik.swagger.annotations.ApiModelProperty;
 
 /******************************************************
  * ****** Created by 吴培基 on 2015/7/20.19:26
  * ****************************************************
  */
-public class Student implements Serializable{
+public class Student extends BaseDaomain{
     private int id;
-
     private String name;
-
     private int age;
 
     public int getId() {
@@ -58,5 +56,8 @@ public class Student implements Serializable{
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+    public Student() {
     }
 }
