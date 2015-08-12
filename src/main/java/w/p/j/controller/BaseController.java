@@ -8,10 +8,10 @@
 
 package w.p.j.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.http.HttpStatus;
 import w.p.j.daomain.BaseResult;
 
 /******************************************************
@@ -36,6 +36,7 @@ public class BaseController {
         BaseResult resultVo = new BaseResult();
         resultVo.setResultData(resultData);
         resultVo.setResultMessage("success");
+        resultVo.setResultCode(HttpStatus.OK);
         return  resultVo;
       //  return JSON.toJSONString(resultVo, feature);
     }
@@ -49,7 +50,7 @@ public class BaseController {
      * @return
      */
 
-    protected BaseResult buildFailedResultInfo(int resultCode, String failedMsg)
+    protected BaseResult buildFailedResultInfo(HttpStatus resultCode, String failedMsg)
     {
         BaseResult resultVo = new BaseResult(resultCode, failedMsg);
        // return JSON.toJSONString(resultVo, feature);

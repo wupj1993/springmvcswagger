@@ -8,6 +8,8 @@
 
 package w.p.j.daomain;
 
+import org.springframework.http.HttpStatus;
+
 import java.io.Serializable;
 
 /******************************************************
@@ -16,7 +18,7 @@ import java.io.Serializable;
  */
 public class BaseResult implements Serializable {
     // 返回码，0表示成功，非0表示失败
-    private int resultCode;
+    private HttpStatus resultCode;
 
     // 返回消息，成功为“success”，失败为具体失败信息
     private String resultMessage;
@@ -24,22 +26,22 @@ public class BaseResult implements Serializable {
     // 返回数据
     private Object resultData;
 
-    public BaseResult(int resultCode, String resultMessage, Object resultData) {
+    public BaseResult(HttpStatus resultCode, String resultMessage, Object resultData) {
         this.resultCode = resultCode;
         this.resultMessage = resultMessage;
         this.resultData = resultData;
     }
 
-    public BaseResult(int resultCode, String resultMessage) {
+    public BaseResult(HttpStatus resultCode, String resultMessage) {
         this.resultCode = resultCode;
         this.resultMessage = resultMessage;
     }
 
-    public int getResultCode() {
+    public HttpStatus getResultCode() {
         return resultCode;
     }
 
-    public void setResultCode(int resultCode) {
+    public void setResultCode(HttpStatus resultCode) {
         this.resultCode = resultCode;
     }
 

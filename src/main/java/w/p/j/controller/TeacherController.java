@@ -14,6 +14,7 @@ import com.wordnik.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 import w.p.j.daomain.BaseResult;
 import w.p.j.daomain.Teacher;
+import w.p.j.exception.InvalidRequestException;
 import w.p.j.service.impl.TeacherServiceImpl;
 
 import javax.annotation.Resource;
@@ -32,6 +33,9 @@ public class TeacherController extends BaseController {
     @ApiOperation(value = "获取教师信息",httpMethod = "GET",notes = "根据教师id获取教师的信息",response = BaseResult.class,protocols = "application/json")
     public BaseResult getTeacherById(@ApiParam(name = "id",required = true,value = "Teacher by Id")@PathVariable("id")int id){
         LOGGER.debug("获取教师信息来了id："+id);
+        if (id>1){
+            throw new InvalidRequestException("invalid request");
+        }
         Teacher teacher=teacherService.getTeacherInfoById(id);
         return buildSuccessResultInfo(teacher);
     }
@@ -47,6 +51,7 @@ public class TeacherController extends BaseController {
     @ResponseBody
     public BaseResult addTeacherInfo(@RequestBody Teacher teacher){
         LOGGER.debug(teacher.toString());
+
         return buildSuccessResultInfo(null);
     }
 

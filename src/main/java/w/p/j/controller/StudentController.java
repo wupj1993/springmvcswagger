@@ -11,8 +11,7 @@ package w.p.j.controller;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import w.p.j.daomain.BaseResult;
 import w.p.j.daomain.Student;
@@ -47,7 +46,7 @@ public class StudentController extends BaseController {
         LOGGER.debug("过来的学生信息:" + studentInfo.toString());
         System.out.println("输出过来的学生信息:" + studentInfo.toString());
         if (studentInfo == null) {
-            return super.buildFailedResultInfo(-1, "post data is empty!");
+            return super.buildFailedResultInfo(HttpStatus.OK,"student can't be null");
         }
         boolean isSuccess = studentService.addStudent(studentInfo);
         return buildSuccessResultInfo(isSuccess);

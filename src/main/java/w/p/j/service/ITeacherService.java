@@ -1,9 +1,8 @@
 /*
- * Copyright (c) 2015 - 7 - 21
- * -0 :50:15
- * -一个人的时候你要好好的努力，这样以后配得起相遇那一刻的怦然心动，你若盛开，清风自来。
- * -作者:吴培基
- * -QQ:757671834
+ * Copyright (c) 2015 / 8 / 9 9 :30 :24
+ * BY:wupeiji
+ * QQ:757671834
+ *
  */
 
 package w.p.j.service;
@@ -15,6 +14,6 @@ import w.p.j.daomain.Teacher;
  * ****************************************************
  */
 public interface ITeacherService {
-    Teacher getTeacherInfoById(int  id);
+    Teacher getTeacherInfoById(int id);
     Teacher getTeacherInfoByName(String name);
 }

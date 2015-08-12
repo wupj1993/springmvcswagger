@@ -44,10 +44,11 @@ public class SwaggerConfig {
      * @return
      */
     private ApiInfo apiInfo() {
+//  ApiInfo(String title, String description, String termsOfServiceUrl, String contact, String license, String licenseUrl)
 
         ApiInfo apiInfo = new ApiInfo("Rest API.作者吴培基", "使用Swagger产生的API接口文档",
                 "<a href='https://github.com/BigDuck'>Github</a>", "757671834@qq.com",
-                "API许可证", "Custom API License URL"
+                "API许可证", "https://github.com/BigDuck"
         );
         return apiInfo;
     }
